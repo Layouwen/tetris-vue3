@@ -2,6 +2,8 @@ import { initMap } from './map'
 import { render } from './render'
 import { addTicker } from './ticker'
 import { intervalTimer } from './utils'
+import { getBoxBottomPoints } from './matrix'
+import { hitBorder } from './hit'
 
 export function startGame(map) {
   initMap(map)
@@ -17,6 +19,11 @@ export function startGame(map) {
 
   const handleTicker = n => {
     if (isDownMove(n, 1000)) {
+      // 获取底部的所有点
+      if (hitBorder(box)) {
+        console.log('游戏结束')
+        return
+      }
       box.y++
     }
     render(box, map)
