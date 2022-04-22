@@ -22,18 +22,26 @@ export function addBoxToMap(box, map) {
 }
 
 export function eliminate(map) {
-  const col = map[0].length
   // 获取所有满行的索引
-  const lines = map.reduce((r, col, i) => {
+  const lines = getCanEliminateLines(map)
+  // 删除满行的索引，在头部添加新的一行
+  _eliminate(lines, map)
+}
+
+function _eliminate(lines, map) {
+  const col = map[0].length
+  lines.forEach(i => {
+    map.splice(i, 1)
+    map.unshift(new Array(col).fill(0))
+  })
+}
+
+function getCanEliminateLines(map) {
+  return map.reduce((r, col, i) => {
     const boo = col.every(v => v === -1)
     if (boo) {
       r.push(i)
     }
     return r
   }, [])
-  // 删除满行的索引，在头部添加新的一行
-  lines.forEach(i => {
-    map.splice(i, 1)
-    map.unshift(new Array(col).fill(0))
-  })
 }

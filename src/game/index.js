@@ -1,4 +1,4 @@
-import { initMap, addBoxToMap } from './map'
+import { initMap, addBoxToMap, eliminate } from './map'
 import { render } from './render'
 import { addTicker } from './ticker'
 import { intervalTimer } from './utils'
@@ -15,6 +15,7 @@ export function startGame(map) {
     if (isDownMove(n, 1000)) {
       if (hitBottomBorder(activeBox) || hitBottomBox(activeBox, map)) {
         addBoxToMap(activeBox, map)
+        eliminate(map)
         activeBox = new Box()
         return
       }
@@ -24,8 +25,15 @@ export function startGame(map) {
   }
 
   window.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown') {
-      activeBox.y++
+    switch (e.code) {
+      case 'ArrowLeft':
+        activeBox.x--
+        break
+      case 'ArrowRight':
+        activeBox.x++
+        break
+      default:
+        break
     }
   })
 
