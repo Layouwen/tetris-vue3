@@ -7,6 +7,7 @@ import { computed } from "vue";
 
 const props = defineProps(["type"]);
 const typeToColorMap = {
+  "-1": "blue",
   0: "gray",
   1: "pink",
 };

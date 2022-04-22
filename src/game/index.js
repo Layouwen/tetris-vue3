@@ -1,36 +1,31 @@
-import { initMap } from './map'
+import { initMap, addBoxToMap } from './map'
 import { render } from './render'
 import { addTicker } from './ticker'
 import { intervalTimer } from './utils'
-import { hitBottomBorder } from './hit'
+import { hitBottomBorder, hitBottomBox } from './hit'
+import { Box } from './Box'
 
 export function startGame(map) {
   initMap(map)
-  const box = {
-    x: 0,
-    y: 0,
-    shape: [
-      [1, 1],
-      [1, 1],
-    ],
-  }
+
   const isDownMove = intervalTimer()
+  let activeBox = new Box()
 
   const handleTicker = n => {
     if (isDownMove(n, 1000)) {
-      // 获取底部的所有点
-      if (hitBottomBorder(box)) {
-        console.log('游戏结束')
+      if (hitBottomBorder(activeBox) || hitBottomBox(activeBox, map)) {
+        addBoxToMap(activeBox, map)
+        activeBox = new Box()
         return
       }
-      box.y++
+      activeBox.y++
     }
-    render(box, map)
+    render(activeBox, map)
   }
 
   window.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown') {
-      box.y++
+      activeBox.y++
     }
   })
 
