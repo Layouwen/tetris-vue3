@@ -32,6 +32,9 @@ export function startGame(map) {
       case 'ArrowRight':
         activeBox.x++
         break
+      case 'ArrowUp':
+        activeBox.rotate()
+        break
       default:
         break
     }
