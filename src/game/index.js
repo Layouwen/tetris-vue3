@@ -3,20 +3,20 @@ import { render } from './render'
 import { addTicker } from './ticker'
 import { intervalTimer } from './utils'
 import { hitBottomBorder, hitBottomBox } from './hit'
-import { Box } from './Box'
+import { createBox } from './Box'
 
 export function startGame(map) {
   initMap(map)
 
   const isDownMove = intervalTimer()
-  let activeBox = new Box()
+  let activeBox = createBox()
 
   const handleTicker = n => {
-    if (isDownMove(n, 1000)) {
+    if (isDownMove(n, 200)) {
       if (hitBottomBorder(activeBox) || hitBottomBox(activeBox, map)) {
         addBoxToMap(activeBox, map)
         eliminate(map)
-        activeBox = new Box()
+        activeBox = createBox()
         return
       }
       activeBox.y++
