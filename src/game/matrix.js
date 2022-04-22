@@ -5,11 +5,13 @@ export function getBoxBottomPoints(matrix) {
   for (let j = 0; j < col; j++) {
     const x = j
     const y = row - 1
-    const point = {
-      x,
-      y,
+    if (matrix[y][x] > 0) {
+      const point = {
+        x,
+        y,
+      }
+      points.push(point)
     }
-    points.push(point)
   }
   return points
 }
