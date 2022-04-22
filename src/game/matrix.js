@@ -1,10 +1,10 @@
-export function getBoxBottomPoints(matrix, initPoint) {
+export function getBoxBottomPoints(matrix) {
   const row = matrix.length
   const col = matrix[0].length
   const points = []
   for (let j = 0; j < col; j++) {
     const x = j
-    const y = row - 1 + initPoint.y
+    const y = row - 1
     const point = {
       x,
       y,

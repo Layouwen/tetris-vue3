@@ -1,5 +1,5 @@
 import { gameRow } from '../src/game/config'
-import { hitBorder } from '../src/game/hit'
+import { hitBottomBorder } from '../src/game/hit'
 test('当 box 到达底部，应该返回 true', () => {
   const box = {
     x: 0,
@@ -10,7 +10,7 @@ test('当 box 到达底部，应该返回 true', () => {
     ],
   }
 
-  expect(hitBorder(box)).toBe(true)
+  expect(hitBottomBorder(box)).toBe(true)
   box.y = 2
-  expect(hitBorder(box)).toBe(false)
+  expect(hitBottomBorder(box)).toBe(false)
 })

@@ -1,23 +1,19 @@
 import { getBoxBottomPoints } from '../src/game/matrix'
 
 test('获取 matrix 底部所有点', () => {
-  const box = {
-    x: 0,
-    y: 5,
-    shape: [
-      [1, 1],
-      [1, 1],
-    ],
-  }
-  const points = getBoxBottomPoints(box.shape, { x: box.x, y: box.y })
+  const matrix = [
+    [1, 1],
+    [1, 1],
+  ]
+  const points = getBoxBottomPoints(matrix)
   expect(points).toEqual([
     {
       x: 0,
-      y: 6,
+      y: 1,
     },
     {
       x: 1,
-      y: 6,
+      y: 1,
     },
   ])
 })

@@ -1,12 +1,18 @@
 import { gameRow } from './config'
 import { getBoxBottomPoints } from './matrix'
 
-export function hitBorder(box) {
-  const points = getBoxBottomPoints(box.shape, { x: box.x, y: box.y })
+export function hitBorder({ box, points, offsetY = 0 }) {
   for (let i = 0; i < points.length; i++) {
-    if (points[i].y + 1 >= gameRow) {
+    const point = points[i]
+    const y = point.y + box.y + offsetY
+    if (y >= gameRow) {
       return true
     }
   }
   return false
+}
+
+export function hitBottomBorder(box) {
+  const points = getBoxBottomPoints(box.shape)
+  return hitBorder({ box, points, offsetY: 1 })
 }
