@@ -12,27 +12,13 @@ export class Game {
     this.activeBox = null
   }
 
-  start() {
-    this.activeBox = createBox()
-
-    window.addEventListener('keydown', this.handleKeydown.bind(this))
-    addTicker(this.handleTicker.bind(this))
+  addPlayer(player) {
+    player.init(this)
   }
 
-  handleKeydown(e) {
-    switch (e.code) {
-      case 'ArrowLeft':
-        this.activeBox.x--
-        break
-      case 'ArrowRight':
-        this.activeBox.x++
-        break
-      case 'ArrowUp':
-        this.activeBox.rotate()
-        break
-      default:
-        break
-    }
+  start() {
+    this.activeBox = createBox()
+    addTicker(this.handleTicker.bind(this))
   }
 
   _isDownMove = intervalTimer()
@@ -47,5 +33,17 @@ export class Game {
       this.activeBox.y++
     }
     render(this.activeBox, this._map)
+  }
+
+  moveBoxToLeft() {
+    this.activeBox.x--
+  }
+
+  moveBoxToRight() {
+    this.activeBox.x++
+  }
+
+  rotateBox() {
+    this.activeBox.rotate()
   }
 }

@@ -1,8 +1,10 @@
 import { Game } from './Game'
+import Player from './Player'
 
 let selfGame = null
 export function initSelfGame(map) {
   selfGame = new Game(map)
+  selfGame.addPlayer(new Player())
 }
 
 let rivalGame = null
