@@ -13,16 +13,24 @@ const io = new Server(httpServer, {
 
 io.on('connection', socket => {
   socket.on('moveBoxToLeft', () => {
-    socket.broadcast.emit('moveBoxToLeft')
+    socket.emit('moveBoxToLeft')
+    // socket.broadcast.emit('moveBoxToLeft')
   })
   socket.on('moveBoxToRight', () => {
-    socket.broadcast.emit('moveBoxToRight')
+    socket.emit('moveBoxToRight')
+    // socket.broadcast.emit('moveBoxToRight')
   })
   socket.on('moveBoxToDown', () => {
-    socket.broadcast.emit('moveBoxToDown')
+    socket.emit('moveBoxToDown')
+    // socket.broadcast.emit('moveBoxToDown')
   })
   socket.on('rotateBox', () => {
-    socket.broadcast.emit('rotateBox')
+    socket.emit('rotateBox')
+    // socket.broadcast.emit('rotateBox')
+  })
+  socket.on('createBox', info => {
+    socket.emit('createBox', info)
+    // socket.broadcast.emit('createBox', info)
   })
 })
 

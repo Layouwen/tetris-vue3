@@ -10,7 +10,7 @@ export class Game {
   constructor(map) {
     initMap(map)
     this._map = map
-    this.activeBox = null
+    this._activeBox = null
   }
 
   addPlayer(player) {
@@ -18,8 +18,12 @@ export class Game {
   }
 
   start() {
-    this.activeBox = createBox()
+    this._activeBox = this._createBoxStrategy()
     addTicker(this.handleTicker.bind(this))
+  }
+
+  setCreateBoxStrategy(strategy) {
+    this._createBoxStrategy = strategy
   }
 
   _isDownMove = intervalTimer()
@@ -31,28 +35,28 @@ export class Game {
         message.emit('moveBoxToDown')
       }
     }
-    render(this.activeBox, this._map)
+    render(this._activeBox, this._map)
   }
 
   moveBoxToDown() {
-    if (hitBottomBorder(this.activeBox) || hitBottomBox(this.activeBox, this._map)) {
-      addBoxToMap(this.activeBox, this._map)
+    if (hitBottomBorder(this._activeBox) || hitBottomBox(this._activeBox, this._map)) {
+      addBoxToMap(this._activeBox, this._map)
       eliminate(this._map)
-      this.activeBox = createBox()
+      this._activeBox = createBox()
       return
     }
-    this.activeBox.y++
+    this._activeBox.y++
   }
 
   moveBoxToLeft() {
-    this.activeBox.x--
+    this._activeBox.x--
   }
 
   moveBoxToRight() {
-    this.activeBox.x++
+    this._activeBox.x++
   }
 
   rotateBox() {
-    this.activeBox.rotate()
+    this._activeBox.rotate()
   }
 }

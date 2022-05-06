@@ -21,7 +21,6 @@ export function initRivalGame(map) {
 
 export function startGame() {
   selfGame.start()
-  rivalGame.start()
 }
 
 export * from './config'
