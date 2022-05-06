@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 0 15px">
     <div class="row" v-for="i in gameRow" :key="i">
       <div v-for="j in gameCol" :key="j">
         <Box :type="map[i - 1][j - 1]" />

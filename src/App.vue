@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="display: flex">
+    <Game />
     <Game />
     <button @click="handleStartGame">start game</button>
   </div>
@@ -14,7 +15,4 @@ function handleStartGame() {
 </script>
 
 <style lang='scss'>
-.row {
-  display: flex;
-}
 </style>
