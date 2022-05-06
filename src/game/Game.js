@@ -4,6 +4,7 @@ import { addTicker } from './ticker'
 import { intervalTimer } from './utils'
 import { hitBottomBorder, hitBottomBox } from './hit'
 import { createBox } from './Box'
+import { message } from './message'
 
 export class Game {
   constructor(map) {
@@ -22,17 +23,25 @@ export class Game {
   }
 
   _isDownMove = intervalTimer()
+  autoMoveDown = true
   handleTicker(n) {
-    if (this._isDownMove(n, 200)) {
-      if (hitBottomBorder(this.activeBox) || hitBottomBox(this.activeBox, this._map)) {
-        addBoxToMap(this.activeBox, this._map)
-        eliminate(this._map)
-        this.activeBox = createBox()
-        return
+    if (this.autoMoveDown) {
+      if (this._isDownMove(n, 1000)) {
+        this.moveBoxToDown()
+        message.emit('moveBoxToDown')
       }
-      this.activeBox.y++
     }
     render(this.activeBox, this._map)
+  }
+
+  moveBoxToDown() {
+    if (hitBottomBorder(this.activeBox) || hitBottomBox(this.activeBox, this._map)) {
+      addBoxToMap(this.activeBox, this._map)
+      eliminate(this._map)
+      this.activeBox = createBox()
+      return
+    }
+    this.activeBox.y++
   }
 
   moveBoxToLeft() {

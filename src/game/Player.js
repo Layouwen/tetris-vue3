@@ -1,3 +1,5 @@
+import { message } from './message'
+
 export default class Player {
   constructor() {
     this._game = null
@@ -11,12 +13,15 @@ export default class Player {
     switch (e.code) {
       case 'ArrowLeft':
         this._game.moveBoxToLeft()
+        message.emit('moveBoxToLeft')
         break
       case 'ArrowRight':
         this._game.moveBoxToRight()
+        message.emit('moveBoxToRight')
         break
       case 'ArrowUp':
         this._game.rotateBox()
+        message.emit('rotateBox')
         break
       default:
         break
