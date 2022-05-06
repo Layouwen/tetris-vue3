@@ -1,12 +1,18 @@
 import { Game } from './Game'
 
-let game = null
-export function initGame(map) {
-  game = new Game(map)
+let selfGame = null
+export function initSelfGame(map) {
+  selfGame = new Game(map)
+}
+
+let rivalGame = null
+export function initRivalGame(map) {
+  rivalGame = new Game(map)
 }
 
 export function startGame() {
-  game.start()
+  selfGame.start()
+  rivalGame.start()
 }
 
 export * from './config'

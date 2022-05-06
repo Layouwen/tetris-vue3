@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex">
-    <Game />
-    <Game />
+    <Game type="self"/>
+    <Game type="rival"/>
     <button @click="handleStartGame">start game</button>
   </div>
 </template>
