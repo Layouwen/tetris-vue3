@@ -10,10 +10,10 @@
 
 <script setup>
 import Box from "./Box.vue";
-import { gameRow, gameCol, startGame } from "../game";
+import { gameRow, gameCol, initGame } from "../game";
 import { reactive } from "vue";
 const map = reactive([]);
-startGame(map);
+initGame(map);
 </script>
 
 <style lang="scss" scoped>
