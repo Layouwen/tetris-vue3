@@ -9,38 +9,43 @@ export class Game {
   constructor(map) {
     initMap(map)
     this._map = map
+    this.activeBox = null
   }
 
   start() {
-    const handleTicker = n => {
-      if (isDownMove(n, 200)) {
-        if (hitBottomBorder(activeBox) || hitBottomBox(activeBox, _map)) {
-          addBoxToMap(activeBox, _map)
-          eliminate(_map)
-          activeBox = createBox()
-          return
-        }
-        activeBox.y++
-      }
-      render(activeBox, _map)
+    this.activeBox = createBox()
+
+    window.addEventListener('keydown', this.handleKeydown.bind(this))
+    addTicker(this.handleTicker.bind(this))
+  }
+
+  handleKeydown(e) {
+    switch (e.code) {
+      case 'ArrowLeft':
+        this.activeBox.x--
+        break
+      case 'ArrowRight':
+        this.activeBox.x++
+        break
+      case 'ArrowUp':
+        this.activeBox.rotate()
+        break
+      default:
+        break
     }
+  }
 
-    window.addEventListener('keydown', e => {
-      switch (e.code) {
-        case 'ArrowLeft':
-          activeBox.x--
-          break
-        case 'ArrowRight':
-          activeBox.x++
-          break
-        case 'ArrowUp':
-          activeBox.rotate()
-          break
-        default:
-          break
+  _isDownMove = intervalTimer()
+  handleTicker(n) {
+    if (this._isDownMove(n, 200)) {
+      if (hitBottomBorder(this.activeBox) || hitBottomBox(this.activeBox, this._map)) {
+        addBoxToMap(this.activeBox, this._map)
+        eliminate(this._map)
+        this.activeBox = createBox()
+        return
       }
-    })
-
-    addTicker(handleTicker.bind(this))
+      this.activeBox.y++
+    }
+    render(this.activeBox, this._map)
   }
 }
